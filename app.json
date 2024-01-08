@@ -1,11 +1,12 @@
 {
   "expo": {
     "name": "RNCourse",
-    "slug": "RNCourse",
+    "slug": "rncourse",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#48644D",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -25,6 +26,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8b42b09c-591e-4b7b-86e4-d324e703956a"
+      }
+    },
+    "owner": "ellievmurphy"
   }
 }
