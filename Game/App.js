@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  ImageBackground,
+  SafeAreaView,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
-import AppLoading from "expo-app-loading";
-import SplashScreen from "expo-splash-screen"
 
 import StartGameScreen from "./screens/StartGameScreen";
 import GameOverScreen from "./screens/GameOverScreen";
@@ -20,7 +23,7 @@ export default function App() {
     "open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
   });
 
-  if(!fontsLoaded) {
+  if (!fontsLoaded) {
     return null;
   }
 
@@ -36,35 +39,43 @@ export default function App() {
   }
 
   if (gameIsOver && userNum) {
-    screen = <GameOverScreen roundsNum={guessRounds} userNum={userNum} onStartNewGame={newGameHandler}/>;
+    screen = (
+      <GameOverScreen
+        roundsNum={guessRounds}
+        userNum={userNum}
+        onStartNewGame={newGameHandler}
+      />
+    );
   }
 
   function gameOverHandler(numRounds) {
     setGameIsOver(true);
     setGuessRounds(numRounds);
   }
-  
+
   function newGameHandler() {
     // need to set userNum to null so we can leave the GameOver screen as is seen in the conditional @38
     setUserNum(null);
     setGuessRounds(0);
-    
   }
 
   return (
-    <LinearGradient
-      colors={[Colors.primary700, Colors.accent500]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        source={require("./assets/images/background.png")}
-        resizeMode="cover"
+    <>
+      <StatusBar style="light" />
+      <LinearGradient
+        colors={[Colors.primary700, Colors.accent500]}
         style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          source={require("./assets/images/background.png")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
