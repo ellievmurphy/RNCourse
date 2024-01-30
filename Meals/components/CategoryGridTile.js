@@ -1,14 +1,17 @@
-import { Pressable, View, Text, StyleSheet, Platform } from "react-native";
+import { Pressable, View, Text, StyleSheet } from "react-native";
 
-function CategoryGridTile({ title, color }) {
+import Shadow from "../constants/shadow";
+
+function CategoryGridTile({ title, color, onPress }) {
   return (
-    <View style={styles.gridItem}>
+    <View style={[styles.gridItem, Shadow]}>
       <Pressable
         android_ripple={{ color: "#ccc" }}
         style={({ pressed }) => [
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]}
+        onPress={onPress}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>
@@ -26,13 +29,6 @@ const styles = StyleSheet.create({
     margin: 16,
     height: 150,
     borderRadius: 8,
-    elevation: 4,
-    backgroundColor: "white", // to see shadow on ios, there has to be a background color
-    shadowColor: "black",
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 8,
-    overflow: Platform.OS === "android" ? "hidden" : "visible", // so android ripple doesn't go outside rounded corners
   },
   button: {
     flex: 1,
